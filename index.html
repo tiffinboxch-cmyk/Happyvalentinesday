@@ -122,9 +122,14 @@ input[type=password] {
 
 /* Glowing pink text inside popup */
 #popupText {
-    font-size: 1.5rem; /* increased text size */
+    font-size: 1.4rem; /* default slightly smaller than before */
     color: #ff69b4;
     text-shadow: 0 0 5px #ffb6c1, 0 0 10px #ff69b4;
+}
+
+/* Special style for photo5 popup */
+#popupText.photo5 {
+    font-size: 1.1rem; /* smaller font so it fits the long text */
 }
 
 @keyframes fadeIn {
@@ -234,7 +239,7 @@ input[type=password] {
     </div>
     <div class="gallery" style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; justify-items:center; margin-top:10px;">
         <div>
-            <img src="photo5.jpg" onclick="note('Idhuku dhane nee kochikite aniku 😏 I promise that i will love you through the highest of highs and the lowest of lows. I promise that i will die for you and more than that i will live for you and for us and for our family. I promise that i will stand by you no matter what and be your biggest supporter in this world. I promise i will choose you every single day for the rest of my life whatever life throws at us. I promise to learn from my mistakes and making sure i be the best possible man for you. I promise Ill give you the happiest life if you choose to stay with me and treat you like the Queen you deserve to be. I promise you the world Azhagii  💞')">
+            <img src="photo5.jpg" onclick="note('Idhuku dhane nee kochikite aniku 😏 I promise that i will love you through the highest of highs and the lowest of lows. I promise that i will die for you and more than that i will live for you and for us and for our family. I promise that i will stand by you no matter what and be your biggest supporter in this world. I promise i will choose you every single day for the rest of my life whatever life throws at us. I promise to learn from my mistakes and making sure i be the best possible man for you. I promise Ill give you the happiest life if you choose to stay with me and treat you like the Queen you deserve to be. I promise you the world Azhagii  💞','photo5')">
             <div class="caption">Happy promise day ✋️😌</div>
         </div>
         <div>
@@ -317,11 +322,14 @@ function quiz(){
     setTimeout(()=>next(3),1200);
 }
 
-function note(text){
+function note(text, photoId){
     const popup = document.getElementById("popup");
     const popupText = document.getElementById("popupText");
     popupText.innerHTML = text;
     popupText.style.animation = "sparkle 1s infinite";
+    // Remove special class first
+    popupText.classList.remove('photo5');
+    if(photoId==='photo5') popupText.classList.add('photo5'); // smaller font for photo5
     document.getElementById("overlay").style.display = "block";
     popup.style.display = "flex";
     popup.style.visibility = "visible";
