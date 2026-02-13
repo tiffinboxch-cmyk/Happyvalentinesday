@@ -5,13 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine</title>
 
+<!-- Google Fonts for cursive style -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Great Vibes', cursive;
     background: #ffc0cb;
     text-align: center;
     overflow-x: hidden;
+    color: #fff0f5; /* soft light color for main text */
 }
 
 .screen { display: none; padding: 40px 20px; }
@@ -25,19 +29,19 @@ button {
     border-radius: 30px;
     border: none;
     background: #ff4d6d;
-    color: white;
+    color: #fff0f5;
+    font-family: 'Great Vibes', cursive;
+    text-shadow: 1px 1px 3px #ffb6c1, 0 0 8px #fff0f5;
     margin-top: 30px;
+    transition: 0.3s ease;
+    cursor: pointer;
 }
 
-input[type=password] {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 2px solid #ff4d6d;
-    margin-top: 20px;
+button:hover {
+    text-shadow: 2px 2px 6px #ffb6c1, 0 0 12px #fff0f5;
+    transform: scale(1.05);
 }
 
-/* Floating hearts */
 .heart {
     position: fixed;
     font-size: 20px;
@@ -177,16 +181,8 @@ input[type=password] {
 
 <body>
 
-<!-- Screen 0: Password -->
-<div class="screen active" id="s0">
-    <h1>qual è la cosa che preferisco al mondo? 💌</h1>
-    <input type="password" id="passInput" placeholder="Type here...">
-    <button onclick="checkPassword()">Submit ✅</button>
-    <p id="passMsg" style="color:red; font-weight:bold;"></p>
-</div>
-
 <!-- Screen 1 -->
-<div class="screen" id="s1">
+<div class="screen active" id="s1">
     <h1>Buon San Valentino, baby ❤️</h1>
     <button onclick="start()">Continue 💌</button>
     <div class="cupid">👶🏹❤️</div>
@@ -260,7 +256,7 @@ I Love you Kanmani</h1>
     <button onclick="closePop()">Close</button>
 </div>
 
-<div id="bigHeart"></div>
+<div id="bigHeart"></div> <!-- will only appear on YES click -->
 
 <audio id="music" src="Poove.mp3" loop></audio>
 
@@ -268,7 +264,7 @@ I Love you Kanmani</h1>
 const music = document.getElementById("music");
 let noCount = 0;
 
-// Floating hearts everywhere
+// Hearts everywhere
 setInterval(()=>{
     let h=document.createElement("div");
     h.className="heart";
@@ -278,18 +274,6 @@ setInterval(()=>{
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),6000);
 },500);
-
-function checkPassword(){
-    const input = document.getElementById("passInput").value;
-    const msg = document.getElementById("passMsg");
-    if(input === "Azhagi"){
-        document.getElementById("s0").classList.remove("active");
-        document.getElementById("s1").classList.add("active");
-        music.play().catch(()=>{});
-    } else {
-        msg.textContent = "Wrong answer 😢 Try again!";
-    }
-}
 
 function start(){
     music.play().catch(()=>{});
